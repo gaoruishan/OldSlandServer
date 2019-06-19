@@ -1,0 +1,40 @@
+*
+* 代码书写规范:
+* 1,js命名用小写,中间用-分割;
+* 2,js内部class 用大驼峰命名;
+* 3,一般js名称带-的 导出/导入带 {};
+*
+
+1,
+    /**
+     * ctx.request内容:
+     *
+     * {method: 'GET',
+     * url: '/v1/book/latest',
+     * header: { host: 'localhost:3000',
+     *          connection: 'keep-alive',
+     *          'accept-language': 'zh-CN,zh;q=0.9,en;q=0.8',
+     *          cookie: 'Webstorm-9778f88e=119352f8-391e-4a60-81db-a3d314e41cd2'  }
+     * }
+     */
+    console.log(ctx.request);
+    ctx.body = {
+        name: 'book'
+    }
+
+2,
+    //主要带()
+    // app.use(router.routes());
+
+3,
+    //实例化router,参数1:请求URL; 参数2:回调函数,带有ctx上下文,next执行函数
+    //使用post传递4种参数
+    router.post('/v1/:id/classic/latest', (ctx, next) => {
+        console.log(ctx.params);// url中拼接
+        console.log(ctx.request.query);//请求参数
+        console.log(ctx.request.header);//请求头
+        console.log(ctx.request.body);//请求体
+        ctx.body = {
+            name: 'classic'
+        }
+    });
