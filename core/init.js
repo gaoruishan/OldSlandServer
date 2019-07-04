@@ -1,4 +1,6 @@
+//require-directory包  调用requireDir方法进行遍历目录下文件
 const requireDir = require('require-directory')
+//koa-router包 通过路由来分发请求url
 const Router = require('koa-router')
 
 class InitManager {

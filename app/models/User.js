@@ -1,9 +1,27 @@
+//sequelize包 用于连接MySQL数据库操作的工具
 const {Sequelize, Model} = require('sequelize')
+//bcryptjs包 用于加密/解密
 const bcrypt = require('bcryptjs')
 const {sequelize} = require('../../core/db')
-
+//定义模型,继承Model
 class User extends Model {
-
+    // 静态方法 async 在方法名前面
+    static async verifyEmailPassword(email,password) {
+        const user = await User.findOne({
+            where:{
+                email
+            }
+        })
+        if (!user) {
+            throw new global.errs.AuthFailed('账户不存在')
+        }
+        //正确
+        const correct = bcrypt.compareSync(password, user.password)
+        if (!correct) {
+            throw new global.errs.AuthFailed('密码不正确')
+        }
+        return user
+    }
 }
 
 User.init({//参数1: User字段项
@@ -20,7 +38,7 @@ User.init({//参数1: User字段项
     },
     password: {
         type: Sequelize.STRING,
-        set(val) {//加密
+        set(val) {//当set密码时调用 进行加密
             const salt = bcrypt.genSaltSync(10)
             const psw = bcrypt.hashSync(val, salt)
             this.setDataValue('password',psw)

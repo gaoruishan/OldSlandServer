@@ -1,5 +1,5 @@
 const {LinValidator, Rule} = require('../../core/lin-validator')
-const User = require('../models/user')
+const User = require('../models/User')
 
 class UserValidator extends LinValidator {
     constructor() {

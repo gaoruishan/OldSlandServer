@@ -197,7 +197,7 @@ class Rule {
     }
 
     validate(field) {
-        if (this.name == 'optional')
+        if (this.name == 'isOptional')
             return new RuleResult(true)
         if (!validator[this.name](field + '', ...this.params)) {
             return new RuleResult(false, this.msg || this.message || '参数错误')
@@ -253,7 +253,7 @@ class RuleField {
 
     _allowEmpty() {
         for (let rule of this.rules) {
-            if (rule.name == 'optional') {
+            if (rule.name == 'isOptional') {
                 return true
             }
         }
@@ -263,7 +263,7 @@ class RuleField {
     _hasDefault() {
         for (let rule of this.rules) {
             const defaultValue = rule.params[0]
-            if (rule.name == 'optional') {
+            if (rule.name == 'isOptional') {
                 return defaultValue
             }
         }

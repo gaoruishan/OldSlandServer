@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize')
-
+//导入配置文件
 const {dbName,user,password,host,port} = require('../config/config').database
 
 //实例化对象: 参数1:数据库名; 参数2:用户名; 参数3:密码; 参数4:可配置项

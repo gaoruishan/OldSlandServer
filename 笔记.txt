@@ -38,3 +38,19 @@
             name: 'classic'
         }
     });
+
+
+4, 方法一定要加 async  如果调用异步的要加await
+中间件即:一个带有ctx,next的箭头函数
+(ctx,next)=>{
+
+ }
+
+5,分析代码步骤:
+    先看package.json ->  "main": "app.js", 找到new 的对象(Koa) 也就是使用的框架,
+    //第一个中间件,通过next捕获异常
+    app.use(catchError);
+    //post请求转换body,parser()因为是function
+    app.use(parser());
+    //InitManager进行统一初始化
+    InitManager.initCore(app);

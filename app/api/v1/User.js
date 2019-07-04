@@ -1,7 +1,7 @@
 const Router = require('koa-router')
-const UserValidator = require("../../validators/user")
-const User = require('../../models/user')
-const {success} = require("../../lib/comm-helper")
+const UserValidator = require("../../validators/UserValidator")
+const User = require('../../models/User')
+const {success} = require("../../lib/CommHelper")
 
 //使用前缀,省去每个接口加'/v1/user'
 const router = new Router({
@@ -16,7 +16,6 @@ router.post('/register', async (ctx) => {
         password: v.get('body.password2')
     }
     //添加数据
-    console.log(user)
     await User.create(user)
     success()
 })
