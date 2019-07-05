@@ -54,3 +54,8 @@
     app.use(parser());
     //InitManager进行统一初始化
     InitManager.initCore(app);
+
+
+6,代码规范:
+  1)只有Model和Router 直接导出, 其他使用{}导出 例如:module.exports = router
+  2)app目录下使用大驼峰命名方式;配置,core,中间件等使用小驼峰

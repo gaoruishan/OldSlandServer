@@ -52,4 +52,6 @@ class InitManager {
     }
 }
 
-module.exports = InitManager
+module.exports = {
+    InitManager
+}

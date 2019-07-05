@@ -45,4 +45,6 @@ class UserValidator extends LinValidator {
     }
 }
 
-module.exports = UserValidator
+module.exports = {
+    UserValidator
+}

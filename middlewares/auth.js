@@ -10,7 +10,7 @@ class Auth {
     }
 
     get m() {
-        // 添加中间件 检查token  HttpBasicAuth方式
+        // 添加中间件 检查token  HttpBasicAuth方式取出ctx.req并验证
         return async (ctx, next) => {
             const userToken = basicAuth(ctx.req)
             let errMsg = 'token不合法'
@@ -36,6 +36,16 @@ class Auth {
             }
             //移交,加await
             await next()
+        }
+    }
+
+   static verifyToken(token) {
+        try {
+            //使用var 解决域的范围
+            jwt.verify(token, global.config.security.secretKey)
+            return true
+        } catch (e) {
+            return false
         }
     }
 }

@@ -1,5 +1,5 @@
 const Router = require('koa-router')
-const UserValidator = require("../../validators/UserValidator")
+const {UserValidator} = require("../../validators/UserValidator")
 const User = require('../../models/User')
 const {success} = require("../../lib/CommHelper")
 
