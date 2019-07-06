@@ -1,16 +1,50 @@
 const {LinValidator, Rule} = require('../../core/lin-validator')
-const Enum = require('../lib/Enum')
+const Enum = require('@enum')
+/**
+ * 校验id
+ * @type {*[]}
+ */
+const isInt = [
+    new Rule('isInt', '需要是正整数', {
+        min: 1
+    }),
+]
+
+/**
+ * 校验是否为空
+ * @param val
+ * @returns {*[]}
+ */
+function isEmpty(val) {
+    return [
+        new Rule('isLength', val, {
+            min: 1
+        })
+    ]
+}
+
+/**
+ * 校验Classic类型
+ * @param vals
+ */
+function checkClassicType(vals) {
+    let type = vals.body.type || vals.path.type
+    if (!type) {
+        throw new Error('type是必传参数')
+    }
+    type = parseInt(type)
+    if (!Enum.ClassicType.isThisType(type)) {
+        throw new Error('type参数不合法')
+    }
+}
 
 class PositiveIntegerValidator extends LinValidator {
     constructor() {
         super()
-        this.id = [
-            new Rule('isInt', '需要是正整数', {
-                min: 1
-            }),
-        ]
+        this.id = isInt
     }
 }
+
 
 class TokenValidator extends LinValidator {
     constructor() {
@@ -30,6 +64,7 @@ class TokenValidator extends LinValidator {
             })
         ]
     }
+
     // 自定义校验, 默认vals相当于ctx
     validateLoginType(vals) {
         if (!vals.body.type) {
@@ -41,18 +76,25 @@ class TokenValidator extends LinValidator {
     }
 }
 
-class TokenEmptyValidator extends LinValidator{
+class TokenEmptyValidator extends LinValidator {
     constructor() {
         super()
-        this.token = [
-            new Rule('isLength','token不能为空',{
-                min:1
-            })
-        ]
+        this.token = isEmpty('token不能为空')
     }
 }
+
+class LikeValidator extends LinValidator {
+    constructor() {
+        super()
+        this.art_id = isInt
+        //将方法赋值给validateType
+        this.validateType = checkClassicType
+    }
+}
+
 module.exports = {
     PositiveIntegerValidator,
     TokenValidator,
     TokenEmptyValidator,
+    LikeValidator,
 }

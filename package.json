@@ -36,5 +36,11 @@
   ],
   "author": "grs",
   "license": "MIT",
-  "devDependencies": {}
+  "devDependencies": {},
+  "_moduleAliases": {
+    "@models": "app/models",
+    "@helper": "app/lib/CommHelper.js",
+    "@enum": "app/lib/Enum.js",
+    "@validator": "app/validators/CommValidator.js"
+  }
 }

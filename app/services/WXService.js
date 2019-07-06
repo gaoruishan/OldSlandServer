@@ -5,7 +5,7 @@ const User = require('../models/User')
 const {generateToken} = require('../../core/util')
 const {Auth} = require('../../middlewares/auth')
 
-class WXManager {
+class WXService {
     /**
      * 检查并返回token
      * @param code
@@ -31,5 +31,5 @@ class WXManager {
 }
 
 module.exports = {
-    WXManager
+    WXManager: WXService
 }

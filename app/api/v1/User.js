@@ -1,7 +1,7 @@
 const Router = require('koa-router')
 const {UserValidator} = require("../../validators/UserValidator")
-const User = require('../../models/User')
-const {success} = require("../../lib/CommHelper")
+const User = require('@models/User')
+const {success} = require("@helper")
 
 //使用前缀,省去每个接口加'/v1/user'
 const router = new Router({

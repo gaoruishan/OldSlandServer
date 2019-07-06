@@ -59,3 +59,10 @@
 6,代码规范:
   1)只有Model和Router 直接导出, 其他使用{}导出 例如:module.exports = router
   2)app目录下使用大驼峰命名方式;配置,core,中间件等使用小驼峰
+  3)表,参数,模型中的字段命名用_分割
+  4)只有validator中可以 用Error 其他地方逻辑用 global.errs 抛出异常
+  5)业务逻辑尽量写在Model层,services是辅助业务逻辑的; 二者选其一,不可相互导入;
+    例如:WXServices不需要Model模型,只是微信的业务逻辑;
+        ClassicService因为Model中classic是多个实体类,需要再加一层业务逻辑;
+  6)因为router不是类,而且导入Model或Service中逻辑,即使有相同业务代码,禁止抽取到Model和Service中去!!!!
+  7)如果router中业务太复杂,需要抽取公共代码到CommHelper中去
