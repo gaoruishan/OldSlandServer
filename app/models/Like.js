@@ -1,4 +1,4 @@
-const {Sequelize, Model} = require('sequelize')
+const {Sequelize, Model, Op} = require('sequelize')
 const {sequelize} = require('../../core/db')
 const {ClassicService} = require('../services/ClassicService')
 
@@ -6,7 +6,10 @@ class Like extends Model {
 
     static async onLike(art_id, type, uid) {
         const like = await Like.findOne({
-            where: {art_id}
+            where: {
+                art_id,
+                type
+            }
         })
         if (like) {
             throw new global.errs.HttpException('已经点赞')
@@ -57,6 +60,23 @@ class Like extends Model {
             }
         })
         return like ? true : false
+    }
+
+    static async getUserLikes(uid) {
+        const likes = await Like.findAll({
+            where: {
+                uid,
+                //对classic类型排除400,其中[Op.not]是key一种字符串的写法
+                // ,Op.not是Sequelize的
+                type: {
+                    [Op.not]: 400
+                }
+            }
+        })
+        if (!likes) {
+            throw new global.errs.NotFound()
+        }
+        return likes
     }
 }
 

@@ -65,4 +65,4 @@
     例如:WXServices不需要Model模型,只是微信的业务逻辑;
         ClassicService因为Model中classic是多个实体类,需要再加一层业务逻辑;
   6)因为router不是类,而且导入Model或Service中逻辑,即使有相同业务代码,禁止抽取到Model和Service中去!!!!
-  7)如果router中业务太复杂,需要抽取公共代码到CommHelper中去
+  7)如果router中业务太复杂,需要抽取公共代码在router中,建议超过三个
