@@ -7,6 +7,9 @@ const {success} = require("@helper")
 const router = new Router({
     prefix: '/v1/user'
 })
+/**
+ * 用户注册
+ */
 //注意要加 async 和await
 router.post('/register', async (ctx) => {
     const v = await new UserValidator().validate(ctx)

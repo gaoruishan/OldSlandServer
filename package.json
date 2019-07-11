@@ -39,7 +39,7 @@
   "devDependencies": {},
   "_moduleAliases": {
     "@models": "app/models",
-    "@helper": "app/lib/CommHelper.js",
+    "@helper": "app/lib/Helper.js",
     "@enum": "app/lib/Enum.js",
     "@validator": "app/validators/CommValidator.js"
   }

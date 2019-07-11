@@ -9,7 +9,7 @@ const router = new Router({
     prefix: '/v1/classic'
 })
 
-let getIndexClassic = async function (ctx, offset) {
+async function getIndexClassic(ctx, offset) {
     //validate第二个参数:设置别名id 变为index
     const v = await new CommValidator.PositiveIntegerValidator().validate(ctx, {
         id: 'index'
@@ -23,7 +23,8 @@ let getIndexClassic = async function (ctx, offset) {
     }
     return flow
 }
-let setClassicDatas = async function (flow, ctx) {
+
+async function setClassicDatas(flow, ctx) {
     const classic = await ClassicService.getClassicData(flow.art_id, flow.type)
     //Sequelize 自带的序列化,将index字段添加到classic中,并转为json
     classic.setDataValue('index', flow.index)
@@ -31,6 +32,7 @@ let setClassicDatas = async function (flow, ctx) {
     classic.setDataValue('like_status', likeStatus)
     ctx.body = classic
 }
+
 /**
  * 获取最新一期
  */

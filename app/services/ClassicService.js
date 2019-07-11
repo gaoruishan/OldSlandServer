@@ -31,6 +31,7 @@ class ClassicService {
 
     static async _getDataByIds(ids, type) {
         const finder = {
+            // 用数组id字段查询 返回数组
             where: {
                 id: {
                     [Op.in]: ids

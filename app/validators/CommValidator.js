@@ -92,9 +92,49 @@ class LikeValidator extends LinValidator {
     }
 }
 
+class BookCommentValidator extends LinValidator {
+    constructor() {
+        super()
+        this.book_id = isInt
+        this.content = [
+            new Rule('isLength', '评论内容范围为12字以内', {
+                min: 1,
+                max: 12
+            })
+        ]
+    }
+}
+
+class SearchValidator extends LinValidator {
+    constructor() {
+        super()
+        this.start = [
+            new Rule('isInt', '不符合规范', {
+                min: 0,
+                max: 1000
+            }),
+            new Rule('isOptional','',0)
+        ]
+        this.count = [
+            new Rule('isInt', '不符合规范', {
+                min:1,
+                max: 20
+            }),
+            new Rule('isOptional','',20)
+        ]
+        this.q = [
+            new Rule('isLength', '请输入搜索内容', {
+                min: 1
+            })
+        ]
+    }
+}
+
 module.exports = {
     PositiveIntegerValidator,
     TokenValidator,
     TokenEmptyValidator,
     LikeValidator,
+    BookCommentValidator,
+    SearchValidator,
 }

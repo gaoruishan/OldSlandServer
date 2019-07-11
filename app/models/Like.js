@@ -78,6 +78,26 @@ class Like extends Model {
         }
         return likes
     }
+
+    static async getLikeBookCount(uid) {
+        //Model中count方法 用于计数
+        const count = await Like.count({
+            where: {
+                uid,
+                type: 400
+            },
+        })
+        return count
+    }
+    static async getLikeBookById(book_id) {
+        const count = await Like.count({
+            where: {
+                art_id:book_id,
+                type: 400
+            },
+        })
+        return count
+    }
 }
 
 Like.init({

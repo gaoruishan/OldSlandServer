@@ -16,6 +16,9 @@ async function emailLogin(account, psw) {
     return util.generateToken(user.id, Auth.USER)
 }
 
+/**
+ * 获取token
+ */
 router.post('/', async (ctx) => {
     const v = await new CommValidator.TokenValidator().validate(ctx)
     const account = v.get('body.account')
@@ -38,7 +41,9 @@ router.post('/', async (ctx) => {
         token
     }
 })
-
+/**
+ * 验证token
+ */
 router.post('/verify',async (ctx)=>{
     const v = await new CommValidator.TokenEmptyValidator().validate(ctx)
     const result = Auth.verifyToken(v.get('body.token'))
