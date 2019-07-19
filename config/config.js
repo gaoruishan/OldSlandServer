@@ -5,11 +5,11 @@
 module.exports = {
     env: 'dev',
     database: {
-        dbName: 'oldsland',
-        host: 'localhost',
-        port: '3307',
+        dbName: 'gaoruishan_cn',
+        host: '148.70.145.170',
+        port: '3306',
         user: 'root',
-        password: 'admin'
+        password: 'grs7412369852'
     },
     security:{
         secretKey:"abcdefg",
@@ -24,4 +24,5 @@ module.exports = {
         detailUrl:'http://t.yushu.im/v2/book/id/%s',
         keywordUrl:'http://t.yushu.im/v2/book/search?q=%s&count=%s&start=%s&summary=%s'
     },
+    host:'http://localhost:3000/',
 }

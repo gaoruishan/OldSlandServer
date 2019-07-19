@@ -15,8 +15,11 @@ const router = new Router({
  * 获取热门书籍
  */
 router.get('/hot_list', new Auth().m, async (ctx, next) => {
-    const book = await  HotBook.getHotList()
-    ctx.body = book
+    const books = await  HotBook.getHotList()
+    ctx.body = {
+        books,
+        total: books.length
+    }
 })
 /**
  * 获取喜欢书籍数量
@@ -60,8 +63,12 @@ router.get('/:book_id/short_comment', new Auth().m, async (ctx) => {
     const v = await new CommValidator.PositiveIntegerValidator().validate(ctx, {
         id: 'book_id'
     })
-    const c = await Comment.getComment(v.get('path.book_id'))
-    ctx.body = c
+    const book_id = v.get('path.book_id')
+    const comment = await Comment.getComment(book_id)
+    ctx.body = {
+        comment,
+        book_id,
+    }
 })
 /**
  * 获取热搜关键字
@@ -93,7 +100,7 @@ router.get('/search', new Auth().m, async (ctx) => {
 /**
  * 获取书籍详细信息
  */
-router.get('/:id/detail',new Auth().m, async (ctx) => {
+router.get('/:id/detail', new Auth().m, async (ctx) => {
     const v = await new CommValidator.PositiveIntegerValidator().validate(ctx)
     const book = await Book.getYunShuDetail(v.get('path.id'))
     ctx.body = book

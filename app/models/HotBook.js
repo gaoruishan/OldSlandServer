@@ -37,10 +37,6 @@ class HotBook extends Model {
 
         return list
     }
-
-    static async _getLikeByBookId(id) {
-
-    }
 }
 
 HotBook.init({

@@ -51,14 +51,14 @@ router.get('/latest', new Auth().m, async (ctx, next) => {
  * 获取当前一期的下一期
  */
 router.get('/:index/next', new Auth().m, async (ctx) => {
-    const flow = await  getIndexClassic(ctx, 1)
+    const flow = await  getIndexClassic(ctx, -1)
     await  setClassicDatas(flow, ctx)
 })
 /**
  * 获取当前一期的上一期
  */
 router.get('/:index/previous', new Auth().m, async (ctx) => {
-    const flow = await  getIndexClassic(ctx, -1)
+    const flow = await  getIndexClassic(ctx, 1)
     await  setClassicDatas(flow, ctx)
 })
 /**
@@ -84,6 +84,7 @@ router.get('/:type/:art_id/favor', new Auth().m, async (ctx) => {
     const like_status = await Like.isLikeStatus(id, type, ctx.auth.uid)
     ctx.body = {
         id,
+        type,
         like_status,
         fav_nums: classic.fav_nums
     }
@@ -94,9 +95,7 @@ router.get('/:type/:art_id/favor', new Auth().m, async (ctx) => {
 router.get('/favor', new Auth().m, async (ctx) => {
     const likes = await Like.getUserLikes(ctx.auth.uid)
     const classics = await ClassicService.getLikeData(likes)
-    ctx.body = {
-        classics
-    }
+    ctx.body = classics
 })
 
 
