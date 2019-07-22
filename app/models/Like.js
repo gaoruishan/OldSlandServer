@@ -62,7 +62,7 @@ class Like extends Model {
         return like ? true : false
     }
 
-    static async getUserLikes(uid) {
+    static async getUserClassicLikes(uid) {
         const likes = await Like.findAll({
             where: {
                 uid,
@@ -89,14 +89,18 @@ class Like extends Model {
         })
         return count
     }
-    static async getLikeBookById(book_id) {
-        const count = await Like.count({
+
+    static async getUserBookLikes(uid) {
+        const likes = await Like.findAll({
             where: {
-                art_id:book_id,
+                uid,
                 type: 400
-            },
+            }
         })
-        return count
+        if (!likes) {
+            throw new global.errs.NotFound()
+        }
+        return likes
     }
 }
 

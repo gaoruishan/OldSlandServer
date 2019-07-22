@@ -93,7 +93,7 @@ router.get('/:type/:art_id/favor', new Auth().m, async (ctx) => {
  * 获取我喜欢的期刊
  */
 router.get('/favor', new Auth().m, async (ctx) => {
-    const likes = await Like.getUserLikes(ctx.auth.uid)
+    const likes = await Like.getUserClassicLikes(ctx.auth.uid)
     const classics = await ClassicService.getLikeData(likes)
     ctx.body = classics
 })

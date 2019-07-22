@@ -14,6 +14,7 @@ router.post('/', new Auth().m, async (ctx) => {
     const v = await new CommValidator.LikeValidator().validate(ctx)
     //uid不建议传递,从token中取
     await  Like.onLike(v.get('body.art_id'), v.get('body.type'), ctx.auth.uid)
+
     success()
 })
 /**

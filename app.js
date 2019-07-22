@@ -3,6 +3,8 @@ const Koa = require('koa')
 const path = require('path')
 const static = require('koa-static')
 const parser = require('koa-bodyparser')
+let https = require("https")
+let fs = require("fs")
 const {InitManager} = require('./core/init')
 const {catchError} = require('./middlewares/exception')
 //导入Model 创建数据库表
@@ -18,5 +20,11 @@ app.use(static(path.join(__dirname,'./static')))
 //InitManager进行统一初始化
 InitManager.initCore(app)
 
+//HTTPS配置
+const httpsOption = {
+    key : fs.readFileSync("./ssl/0_gaoruishan.cn.key"),
+    cert: fs.readFileSync("./ssl/1_gaoruishan.cn_bundle.pem")
+}
+
 //开启监听接口
-app.listen(3000)
+https.createServer(httpsOption, app.callback()).listen(3000)

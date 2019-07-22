@@ -30,21 +30,19 @@ router.get('/favor/count', new Auth().m, async (ctx) => {
         count
     }
 })
+
 /**
- * 获取书籍点赞情况
+ * 获取点赞的书籍列表
  */
-router.get('/:book_id/favor', new Auth().m, async (ctx) => {
-    const v = await new CommValidator.PositiveIntegerValidator().validate(ctx, {
-        id: 'book_id'
-    })
-    const book_id = v.get('path.book_id')
-    const fav_nums = await Like.getLikeBookById(book_id)
-    const like_status = await Like.isLikeStatus(book_id, Enum.ClassicType.BOOK, ctx.auth.uid)
-    ctx.body = {
-        id: book_id,
-        like_status,
-        fav_nums
+router.get('/favor', new Auth().m, async (ctx) => {
+    const likeList = await Like.getUserBookLikes(ctx.auth.uid)
+    let arrObj = []
+    for (const like of likeList) {
+        // arrObj.push(like.art_id)
+        const book = await Book.getYunShuDetail(like.art_id)
+        arrObj.push(book)
     }
+    ctx.body = arrObj
 })
 /**
  * 新增短评
@@ -103,7 +101,10 @@ router.get('/search', new Auth().m, async (ctx) => {
 router.get('/:id/detail', new Auth().m, async (ctx) => {
     const v = await new CommValidator.PositiveIntegerValidator().validate(ctx)
     const book = await Book.getYunShuDetail(v.get('path.id'))
-    ctx.body = book
+    ctx.body = {
+        ...book,
+        type: 400,
+    }
 })
 
 module.exports = router

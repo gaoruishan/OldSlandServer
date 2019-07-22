@@ -1,4 +1,5 @@
 const {Movie, Music, Sentence} = require('../models/Classic')
+const Book = require('../models/Book')
 const {Op} = require('sequelize')
 const {flatten} = require('lodash')
 
@@ -81,7 +82,13 @@ class ClassicService {
                 classic = await Sentence.findOne(finder)
                 break
             case 400:
-
+                classic = await Book.findOne(finder)
+                if (!classic) {
+                    classic = await Book.create({
+                        id: art_id,
+                        fav_nums: 0
+                    })
+                }
                 break
             default:
                 break
