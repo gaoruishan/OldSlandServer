@@ -5,11 +5,17 @@
 module.exports = {
     env: 'dev',
     database: {
-        dbName: 'gaoruishan_cn',
-        host: '148.70.145.170',
-        port: '3306',
+        // dbName: 'gaoruishan_cn',
+        // host: '148.70.145.170',
+        // port: '3306',
+        // user: 'root',
+        // password: 'grs7412369852',
+
+        dbName: 'oldsland',
+        host: 'localhost',
+        port: '3307',
         user: 'root',
-        password: 'grs7412369852'
+        password: 'admin'
     },
     security:{
         secretKey:"abcdefg",

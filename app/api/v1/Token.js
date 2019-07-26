@@ -13,6 +13,7 @@ const router = new Router({
 
 async function emailLogin(account, psw) {
     const user = await User.verifyEmailPassword(account, psw)
+    //Auth.USER权限
     return util.generateToken(user.id, Auth.USER)
 }
 

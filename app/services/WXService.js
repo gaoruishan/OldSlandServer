@@ -26,6 +26,7 @@ class WXService {
         if (!user) {
             user = await User.registerUserByOpenId(openid)
         }
+        //Auth.USER权限
         return generateToken(user.id,Auth.USER)
     }
 }

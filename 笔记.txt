@@ -66,3 +66,15 @@
         ClassicService因为Model中classic是多个实体类,需要再加一层业务逻辑;
   6)因为router不是类,而且导入Model或Service中逻辑,即使有相同业务代码,禁止抽取到Model和Service中去!!!!
   7)如果router中业务太复杂,需要抽取公共代码在router中,建议超过三个
+
+
+7,安装nodemon: npm install -g nodemon
+  在app.js目录下启动: nodemon app.js
+  运行 debug 模式: nodemon --debug app.js
+
+
+8,Lin CMS文档: http://doc.cms.7yue.pro/
+
+9,Lin UI文档: http://doc.mini.7yue.pro/
+
+10,旧岛小程序API: http://bl.7yue.pro/dev/index.html

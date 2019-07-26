@@ -27,6 +27,7 @@ class Auth {
                 }
                 throw new global.errs.Forbbiden(errMsg)
             }
+            //decode.scope默认是USER=8,new Auth(level).m中level值越大 要求权限越高
             if (decode.scope < this.level) {
                 throw new global.errs.Forbbiden("权限不足")
             }
