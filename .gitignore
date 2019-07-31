@@ -6,5 +6,5 @@ node_modules/
 .idea/
 package-lock.json
 
-/config/config.js
+/config/config1.js
 
